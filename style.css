@@ -192,6 +192,44 @@ hr {
         opacity: 0.5;
     }
 }
+@keyframes pulse-red {
+    0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
+    100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.2); }
+}
+
+.navbar {
+    animation: pulse-red 4s infinite;
+    border-bottom: 1px solid #440000; /* Warna merah darah gelap */
+}
+
+.container {
+    animation: flicker 0.1s infinite; /* Membuat layar sedikit bergetar halus */
+}
+
+
+.redacted {
+    background-color: #111;
+    color: #111;
+    cursor: help;
+    transition: all 0.5s ease;
+    padding: 0 2px;
+}
+
+.redacted:hover {
+    background-color: transparent;
+    color: #ff4444;
+    text-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
+}
+
+/* Efek Flicker Pelan */
+@keyframes flicker {
+    0% { opacity: 0.97; }
+    5% { opacity: 0.95; }
+    10% { opacity: 0.9; }
+    15% { opacity: 0.98; }
+    100% { opacity: 1; }
+}
 
 /* Footer */
 footer {
@@ -342,3 +380,30 @@ footer {
     10%, 30%, 50%, 70%, 90% { transform: translate(-2px, 2px); }
     20%, 40%, 60%, 80% { transform: translate(2px, -2px); }
 }
+
+        .login-box {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 30px;
+            border: 1px double #500;
+            background: #050000;
+            text-align: center;
+        }
+        input {
+            background: #000;
+            border: 1px solid #300;
+            color: #f00;
+            padding: 10px;
+            width: 100%;
+            margin-bottom: 20px;
+            font-family: 'Courier New', monospace;
+        }
+        button {
+            background: #300;
+            color: #ff4444;
+            border: 1px solid #f00;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        button:hover { background: #500; }
+        .hint { font-size: 0.7rem; color: #444; margin-top: 20px; }

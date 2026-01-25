@@ -90,46 +90,42 @@ imgElement.addEventListener('click', function() {
     }
 });
 
-// Fungsi untuk halaman navbar yang error
-const navLinks = document.querySelectorAll('.nav-menu a:not(.active)');
+// Menyembunyikan password di console log agar user harus "Inspect Element"
+console.log("%cAUTH_CODE: OMEGA_REBORN_2007", "color: #050000; background: #050000;"); 
+// Password di atas disamarkan (hitam di atas hitam), user harus memblok teks di konsol untuk membacanya.
 
-navLinks.forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        
-        // Tunggu 7 detik dulu
-        setTimeout(() => {
-            
-            // 1. Background jadi merah gelap
-            body.style.backgroundColor = '#1a0000';
-            
-            // 2. Gambar jadi terbalik + blur
-            imgElement.style.transform = 'rotate(180deg) scale(1.1)';
-            imgElement.style.filter = 'blur(2px) brightness(0.6)';
-            imgElement.style.transition = 'all 2s ease';
-            
-            // 3. Semua teks jadi merah
-            document.querySelectorAll('p, h2, h3').forEach(el => {
-                el.style.color = '#ff6666';
-                el.style.textShadow = '0 0 10px red';
-            });
-            
-            // 4. Container bergetar sedikit
-            document.querySelector('.container').style.animation = 'shake 0.5s infinite';
-            
-            // 5. Munculkan pesan tersembunyi
-            hiddenMsg.style.display = 'block';
-            
-            // 6. Navbar jadi merah
-            document.querySelector('.navbar').style.backgroundColor = '#300';
-            document.querySelector('.navbar').style.borderColor = '#ff0000';
-            
-            // 7. Alert misterius
-            setTimeout(() => {
-                alert('⚠️ SISTEM DIKOMPROMIKAN ⚠️\n\nAnda tidak seharusnya berada di sini...');
-            }, 1000);
-            
-        }, 4000); // 7 detik
-    });
+// Atau simpan di metadata title
+document.addEventListener('visibilitychange', function() {
+    if (document.hidden) {
+        document.title = "KODE: 210907"; // Tanggal Last Updated kamu
+    }
 });
+
+function checkAccess() {
+    const key = document.getElementById('passkey').value;
+    const loginBox = document.querySelector('.login-box');
+    const content = document.getElementById('classified-content');
+
+    // Kamu bisa menggunakan kode dari tanggal '210907' atau 'OMEGA_REBORN'
+    if (key === "210907") {
+        loginBox.style.display = "none";
+        content.style.display = "block";
+        document.body.style.backgroundColor = "#000";
+        alert("ACCESS GRANTED. WELCOME, ADMINISTRATOR.");
+    } else {
+        alert("ACCESS DENIED. AUTHORITIES NOTIFIED.");
+        document.body.style.animation = "shake 0.2s 5";
+    }
+}
+
+function typeWriter(text, i, fnCallback) {
+    if (i < text.length) {
+        document.getElementById("terminal-text").innerHTML = text.substring(0, i+1) + '<span aria-hidden="true" class="cursor">_</span>';
+        setTimeout(function() {
+            typeWriter(text, i + 1, fnCallback)
+        }, 50); // Kecepatan mengetik
+    } else if (typeof fnCallback == 'function') {
+        setTimeout(fnCallback, 700);
+    }
+}
 
