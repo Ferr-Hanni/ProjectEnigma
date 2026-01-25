@@ -10,6 +10,55 @@ body {
     font-family: 'Courier New', Courier, monospace;
     min-height: 100vh;
     transition: background-color 0.5s ease;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Scanline Effect - Always Active */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15) 0px,
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
+    animation: scanline 8s linear infinite;
+}
+
+@keyframes scanline {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(10px); }
+}
+
+/* CRT Monitor Effect */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+    pointer-events: none;
+    z-index: 9998;
+}
+
+/* Creepy Cursor */
+body {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="rgba(255,68,68,0.3)" stroke="rgba(255,68,68,0.8)" stroke-width="1"/></svg>') 10 10, auto;
+}
+
+a, button {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><circle cx="10" cy="10" r="8" fill="rgba(255,0,0,0.5)" stroke="rgba(255,0,0,1)" stroke-width="2"/></svg>') 10 10, pointer;
 }
 
 /* Navbar Styles */
@@ -37,6 +86,24 @@ body {
     color: #ff4444;
     font-weight: bold;
     letter-spacing: 2px;
+    animation: glitch-logo 5s infinite;
+    position: relative;
+}
+
+/* Glitch effect for logo */
+@keyframes glitch-logo {
+    0%, 90%, 100% {
+        transform: translate(0);
+        text-shadow: 2px 2px 0 #ff0000;
+    }
+    92% {
+        transform: translate(-2px, 2px);
+        text-shadow: -2px -2px 0 #00ff00, 2px 2px 0 #0000ff;
+    }
+    94% {
+        transform: translate(2px, -2px);
+        text-shadow: 2px -2px 0 #ff0000, -2px 2px 0 #00ffff;
+    }
 }
 
 .nav-menu {
@@ -51,6 +118,7 @@ body {
     padding: 8px 15px;
     transition: all 0.3s ease;
     border: 1px solid transparent;
+    position: relative;
 }
 
 .nav-menu a:hover {
@@ -72,6 +140,7 @@ body {
     border: 1px solid #222;
     background-color: #000;
     box-shadow: 0 0 30px rgba(255, 0, 0, 0.15);
+    position: relative;
 }
 
 /* Header */
@@ -85,6 +154,7 @@ header h1 {
     text-align: center;
     margin-bottom: 10px;
     text-shadow: 2px 2px 4px rgba(255, 0, 0, 0.5);
+    position: relative;
 }
 
 .subtitle {
@@ -123,11 +193,68 @@ hr {
     cursor: pointer;
     transition: all 0.3s ease;
     object-fit: cover;
+    position: relative;
 }
 
 #glitch-image:hover {
     filter: sepia(100%) hue-rotate(90deg);
     box-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+}
+
+/* Chromatic Aberration Effect for Image */
+#glitch-image.chromatic {
+    animation: chromatic-shift 0.3s infinite;
+}
+
+@keyframes chromatic-shift {
+    0% {
+        filter: 
+            drop-shadow(2px 0 0 rgba(255, 0, 0, 0.8))
+            drop-shadow(-2px 0 0 rgba(0, 255, 255, 0.8));
+    }
+    50% {
+        filter: 
+            drop-shadow(-2px 0 0 rgba(255, 0, 0, 0.8))
+            drop-shadow(2px 0 0 rgba(0, 255, 255, 0.8));
+    }
+    100% {
+        filter: 
+            drop-shadow(2px 0 0 rgba(255, 0, 0, 0.8))
+            drop-shadow(-2px 0 0 rgba(0, 255, 255, 0.8));
+    }
+}
+
+/* Advanced Glitch Effect */
+.glitch-active {
+    position: relative;
+    animation: glitch-skew 1s infinite;
+}
+
+@keyframes glitch-skew {
+    0% {
+        transform: skew(0deg);
+        filter: hue-rotate(0deg);
+    }
+    10% {
+        transform: skew(-2deg);
+        filter: hue-rotate(90deg);
+    }
+    20% {
+        transform: skew(2deg);
+        filter: hue-rotate(0deg);
+    }
+    30% {
+        transform: skew(-1deg);
+        filter: hue-rotate(270deg);
+    }
+    40% {
+        transform: skew(1deg);
+        filter: hue-rotate(0deg);
+    }
+    100% {
+        transform: skew(0deg);
+        filter: hue-rotate(0deg);
+    }
 }
 
 .caption {
@@ -192,6 +319,7 @@ hr {
         opacity: 0.5;
     }
 }
+
 @keyframes pulse-red {
     0% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.2); }
     50% { box-shadow: 0 0 20px rgba(255, 0, 0, 0.6); }
@@ -200,13 +328,12 @@ hr {
 
 .navbar {
     animation: pulse-red 4s infinite;
-    border-bottom: 1px solid #440000; /* Warna merah darah gelap */
+    border-bottom: 1px solid #440000;
 }
 
 .container {
-    animation: flicker 0.1s infinite; /* Membuat layar sedikit bergetar halus */
+    animation: flicker 0.1s infinite;
 }
-
 
 .redacted {
     background-color: #111;
@@ -214,6 +341,7 @@ hr {
     cursor: help;
     transition: all 0.5s ease;
     padding: 0 2px;
+    position: relative;
 }
 
 .redacted:hover {
@@ -231,6 +359,137 @@ hr {
     100% { opacity: 1; }
 }
 
+/* Hidden Message Effect */
+.glitch-text {
+    position: relative;
+    display: inline-block;
+}
+
+.glitch-text::before,
+.glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitch-text::before {
+    animation: glitch-anim 2s infinite;
+    color: #ff0000;
+    z-index: -1;
+}
+
+.glitch-text::after {
+    animation: glitch-anim 3s infinite reverse;
+    color: #00ffff;
+    z-index: -2;
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip-path: inset(40% 0 61% 0);
+        transform: translate(-2px, 2px);
+    }
+    20% {
+        clip-path: inset(92% 0 1% 0);
+        transform: translate(2px, -2px);
+    }
+    40% {
+        clip-path: inset(43% 0 1% 0);
+        transform: translate(-2px, 2px);
+    }
+    60% {
+        clip-path: inset(25% 0 58% 0);
+        transform: translate(2px, -2px);
+    }
+    80% {
+        clip-path: inset(54% 0 7% 0);
+        transform: translate(-2px, 2px);
+    }
+    100% {
+        clip-path: inset(58% 0 43% 0);
+        transform: translate(0);
+    }
+}
+
+/* Subliminal Messages */
+.subliminal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: rgba(255, 68, 68, 0.1);
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    animation: subliminal-flash 10s infinite;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.3);
+}
+
+@keyframes subliminal-flash {
+    0%, 98%, 100% {
+        opacity: 0;
+    }
+    99% {
+        opacity: 0.15;
+    }
+}
+
+/* Static Noise Overlay */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200"><filter id="noise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noise)" opacity="0.05"/></svg>');
+    pointer-events: none;
+    z-index: 9997;
+    opacity: 0.3;
+    animation: noise-anim 0.2s infinite;
+}
+
+@keyframes noise-anim {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-5%, -5%); }
+    20% { transform: translate(-10%, 5%); }
+    30% { transform: translate(5%, -10%); }
+    40% { transform: translate(-5%, 15%); }
+    50% { transform: translate(-10%, 5%); }
+    60% { transform: translate(15%, 0); }
+    70% { transform: translate(0, 10%); }
+    80% { transform: translate(-15%, 0); }
+    90% { transform: translate(10%, 5%); }
+    100% { transform: translate(5%, 0); }
+}
+
+/* RGB Split Text Effect */
+.rgb-split {
+    position: relative;
+    animation: rgb-split-anim 0.5s infinite;
+}
+
+@keyframes rgb-split-anim {
+    0% {
+        text-shadow: 
+            2px 0 0 rgba(255, 0, 0, 0.7),
+            -2px 0 0 rgba(0, 255, 255, 0.7);
+    }
+    50% {
+        text-shadow: 
+            -2px 0 0 rgba(255, 0, 0, 0.7),
+            2px 0 0 rgba(0, 255, 255, 0.7);
+    }
+    100% {
+        text-shadow: 
+            2px 0 0 rgba(255, 0, 0, 0.7),
+            -2px 0 0 rgba(0, 255, 255, 0.7);
+    }
+}
+
 /* Footer */
 footer {
     margin-top: 50px;
@@ -246,7 +505,6 @@ footer {
     color: #ff4444;
     font-size: 0.75rem;
 }
-
 
 /* Responsive Design */
 /* Hamburger Menu */
@@ -381,29 +639,62 @@ footer {
     20%, 40%, 60%, 80% { transform: translate(2px, -2px); }
 }
 
-        .login-box {
-            max-width: 400px;
-            margin: 100px auto;
-            padding: 30px;
-            border: 1px double #500;
-            background: #050000;
-            text-align: center;
-        }
-        input {
-            background: #000;
-            border: 1px solid #300;
-            color: #f00;
-            padding: 10px;
-            width: 100%;
-            margin-bottom: 20px;
-            font-family: 'Courier New', monospace;
-        }
-        button {
-            background: #300;
-            color: #ff4444;
-            border: 1px solid #f00;
-            padding: 10px 20px;
-            cursor: pointer;
-        }
-        button:hover { background: #500; }
-        .hint { font-size: 0.7rem; color: #444; margin-top: 20px; }
+.login-box {
+    max-width: 400px;
+    margin: 100px auto;
+    padding: 30px;
+    border: 1px double #500;
+    background: #050000;
+    text-align: center;
+}
+
+input {
+    background: #000;
+    border: 1px solid #300;
+    color: #f00;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    font-family: 'Courier New', monospace;
+}
+
+button {
+    background: #300;
+    color: #ff4444;
+    border: 1px solid #f00;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+button:hover { 
+    background: #500;
+}
+
+.hint { 
+    font-size: 0.7rem; 
+    color: #444; 
+    margin-top: 20px; 
+}
+
+/* Distortion Effect for Chaos Mode */
+.distorted {
+    animation: distortion 0.3s infinite;
+}
+
+@keyframes distortion {
+    0% {
+        transform: skew(0deg, 0deg);
+    }
+    25% {
+        transform: skew(2deg, -2deg);
+    }
+    50% {
+        transform: skew(-2deg, 2deg);
+    }
+    75% {
+        transform: skew(1deg, 1deg);
+    }
+    100% {
+        transform: skew(0deg, 0deg);
+    }
+}
