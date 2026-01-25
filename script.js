@@ -4,6 +4,26 @@ const hiddenMsg = document.getElementById('hidden-message');
 const counterDisplay = document.getElementById('counter');
 const body = document.body;
 
+// Hamburger Menu Toggle
+const hamburger = document.getElementById('hamburger');
+const navMenu = document.getElementById('navMenu');
+
+if (hamburger) {
+    hamburger.addEventListener('click', function() {
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+    });
+}
+
+// Close menu saat klik link
+const allNavLinks = document.querySelectorAll('.nav-menu a');
+allNavLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+    });
+});
+
 // Daftar gambar yang semakin lama semakin aneh
 const images = [
     "assets/img/unknown.jpg",
