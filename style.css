@@ -269,6 +269,28 @@ hr {
     font-size: 0.85rem;
 }
 
+/* Morse Code Indicator */
+.morse-indicator {
+    margin-top: 15px;
+    color: #ff4444;
+    font-size: 2rem;
+    animation: morse-blink 8s infinite;
+    cursor: help;
+}
+
+/* Morse Code Animation: "SOS" pattern */
+@keyframes morse-blink {
+    0%, 2%, 4%, 6%, 10%, 12%, 14%, 18%, 20%, 22%, 100% {
+        opacity: 1;
+    }
+    1%, 3%, 5%, 8%, 11%, 13%, 16%, 19%, 21%, 24% {
+        opacity: 0.2;
+    }
+    /* S (dot dot dot) - quick blinks */
+    /* O (dash dash dash) - longer blinks at 10%, 18% */
+    /* S (dot dot dot) - quick blinks */
+}
+
 /* Content Section */
 .content {
     background-color: #0a0a0a;
@@ -674,6 +696,19 @@ button:hover {
     font-size: 0.7rem; 
     color: #444; 
     margin-top: 20px; 
+}
+
+/* Steganography Hint */
+.stego-hint {
+    font-size: 0.6rem;
+    color: #222;
+    margin-top: 10px;
+    transition: opacity 0.5s ease;
+}
+
+.stego-hint:hover {
+    opacity: 1 !important;
+    color: #ff4444;
 }
 
 /* Distortion Effect for Chaos Mode */

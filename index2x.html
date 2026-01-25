@@ -5,6 +5,14 @@
     <title>TERMINAL ACCESS - LEVEL 5</title>
     <link rel="stylesheet" href="style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Hidden Hex Message -->
+    <meta name="auth-token" content="32 31 30 39 30 37">
+    <!-- Hex to ASCII: "210907" -->
+    
+    <!-- ROT13 Encoded Password Hint -->
+    <meta name="hint" content="Purpx gur ynfg hcqngrq qngr ba vaqrk.ugzy">
+    <!-- Decode: "Check the last updated date on index.html" -->
 </head>
 <body>
 
@@ -31,22 +39,110 @@
     <div class="container">
         <div class="login-box">
             <h2 style="color: #f00; margin-bottom: 20px;">RESTRICTED ACCESS</h2>
-            <p style="font-size: 0.8rem; margin-bottom: 20px;">SISTEM IDENTIFIKASI BIOMETRIK GAGAL. MASUKKAN KODE OTORISASI MANUAL.</p>
-            <input type="password" id="passkey" placeholder="ENTER CODE...">
+            <p style="font-size: 0.8rem; margin-bottom: 20px;">
+                SISTEM IDENTIFIKASI BIOMETRIK GAGAL. MASUKKAN KODE OTORISASI MANUAL.
+            </p>
+            
+            <!-- Hidden Binary in Data Attribute -->
+            <div data-binary="00110010 00110001 00110000 00111001 00110000 00110111">
+                <!-- Binary: "210907" -->
+            </div>
+            
+            <input type="password" id="passkey" placeholder="ENTER CODE..." 
+                   data-hint="DDMMYY" 
+                   title="Format: Date from Subject #404 records">
             <button onclick="checkAccess()">ACCESS</button>
+            
             <p class="hint">Hint: Lihat lebih dekat pada subjek #404... (Cek Inspect Element atau Title Bar)</p>
+            
+            <!-- Additional Hidden Hints -->
+            <div style="display: none;" class="secret-hints">
+                <!-- Caesar Cipher (shift 3) -->
+                <p data-cipher="Sdvvzrug: 213907 ru RPHJ_UHERUQ_2007">
+                    <!-- Decode: "Password: 210907 or OMEGA_REBORN_2007" -->
+                </p>
+                
+                <!-- Morse Code -->
+                <p data-morse="..--- .---- ----- ----. ----- --...">
+                    <!-- Morse: "210907" -->
+                </p>
+                
+                <!-- Reverse -->
+                <p data-reverse="709012">
+                    <!-- Reversed: "210907" -->
+                </p>
+                
+                <!-- Atbash Cipher -->
+                <p data-atbash="LNVTZ_IVYLIN_2007">
+                    <!-- Decode: "OMEGA_REBORN_2007" -->
+                </p>
+            </div>
+            
+            <!-- Hidden ASCII Art in Comment -->
+            <!--
+            ___  _ ___   ___   ___  _____ 
+            |__ \/ |   \ / _ \ / _ \|___  |
+               / /| | |) | | | | (_) |  / / 
+              / /_| |_| || |_| |\__, | / /  
+             |____|_|___/ \___/   /_/ /_/   
+            -->
         </div>
+        
         <div id="classified-content" style="display: none;">
             <h1 style="color: #ff4444;">DATA TERENKRIPSI TERBUKA</h1>
             <p>Subjek #404 bukan manusia. Dia adalah manifestasi dari...</p>
+            
+            <!-- Hidden continuation when accessed -->
+            <div class="secret-revelation" style="margin-top: 30px; padding: 20px; border: 1px solid #ff4444;">
+                <h3>CLASSIFIED INFORMATION:</h3>
+                <p style="color: #c4c4c4;">
+                    Experiment OMEGA was initiated on <span style="color: #ff4444;">September 21, 2007</span> 
+                    at coordinates <span style="color: #ff4444;">-7.9666, 112.6326</span> (Malang Underground Facility).
+                </p>
+                <p style="color: #c4c4c4; margin-top: 15px;">
+                    Subject #404 exhibited anomalous properties that defied conventional understanding. 
+                    The project was terminated, but <span style="color: #ff4444;">something remains...</span>
+                </p>
+                
+                <!-- Base64 Encoded Final Message -->
+                <p style="font-size: 0.7rem; color: #666; margin-top: 20px;">
+                    FINAL LOG: VGhlIGV4cGVyaW1lbnQgbmV2ZXIgZW5kZWQuIFN1YmplY3QgIzQwNCBpcyBzdGlsbCBvdXQgdGhlcmUuIFdhdGNoaW5nLiBXYWl0aW5nLg==
+                    <!-- Decode: "The experiment never ended. Subject #404 is still out there. Watching. Waiting." -->
+                </p>
+            </div>
         </div>
     </div>
 
-        <footer>
-            <p>&copy; 2007 System Verification Research Corp. </p>
-            <p class="footer-note">CONFIDENTIAL - DO NOT DISTRIBUTE - FERDIANTO</p>
-        </footer>
+    <footer>
+        <p>&copy; 2007 System Verification Research Corp. </p>
+        <p class="footer-note">CONFIDENTIAL - DO NOT DISTRIBUTE - FERDIANTO</p>
+        
+        <!-- Hex Color Code Secret -->
+        <div style="color: #210907; background: #210907;">
+            ACCESS_GRANTED_210907
+        </div>
+    </footer>
 
     <script src="script.js"></script>
+    
+    <!-- Additional Hidden Clues in JavaScript -->
+    <script>
+        // Hidden password validation hints
+        const validCodes = [
+            "210907",           // Date format
+            "OMEGA_REBORN_2007", // Full code
+            "092107",           // US date format
+            "20070921"          // ISO date format
+        ];
+        
+        // Obfuscated hint in console
+        setTimeout(() => {
+            console.log("%cPASSWORD HINT:", "color: #333; background: #333;");
+            console.log("%cTry the date from index.html: DD.MM.YYYY → DDMMYY", "color: #333; background: #333;");
+        }, 5000);
+        
+        // Hidden Konami code for instant access
+        let konamiUnlock = false;
+    </script>
 </body>
 </html>

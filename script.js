@@ -392,3 +392,179 @@ function checkDarkHours() {
 // Check dark hours on load and every minute
 checkDarkHours();
 setInterval(checkDarkHours, 60000);
+
+// ============================================
+// DECODER FUNCTIONS FOR HIDDEN MESSAGES
+// ============================================
+
+// Easter Egg: Right-click on specific elements reveals decoded messages
+document.addEventListener('contextmenu', function(e) {
+    const target = e.target;
+    
+    // Decode Base64 in meta description
+    if (target.tagName === 'H1' || target.classList.contains('nav-logo')) {
+        e.preventDefault();
+        const metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+            const decoded = atob(metaDesc.content);
+            alert('🔓 BASE64 DECODED:\n' + decoded);
+        }
+    }
+    
+    // Reveal hidden data attributes
+    if (target.id === 'glitch-image') {
+        e.preventDefault();
+        const corruption = target.getAttribute('data-corruption');
+        const timestamp = target.getAttribute('data-timestamp');
+        const coords = target.getAttribute('data-coordinates');
+        
+        alert(`🔓 IMAGE METADATA:
+Corruption Code: ${corruption} (HEX: ${parseInt(corruption, 16).toString(16).toUpperCase()})
+Timestamp: ${new Date(parseInt(timestamp) * 1000).toLocaleString()}
+Coordinates: ${coords}
+        `);
+    }
+});
+
+// Console Commands for decoding
+console.log("%c=== DECODER TOOLS AVAILABLE ===", "color: #ff4444; font-size: 14px; font-weight: bold;");
+console.log("%cType these commands:", "color: #888;");
+console.log("%c  decode.base64('string') - Decode Base64", "color: #666;");
+console.log("%c  decode.morse('... --- ...') - Decode Morse", "color: #666;");
+console.log("%c  decode.binary('01001000 01101001') - Decode Binary", "color: #666;");
+console.log("%c  decode.rot13('Uryyb') - Decode ROT13", "color: #666;");
+console.log("%c  decode.caesar('Khoor', 3) - Decode Caesar Cipher", "color: #666;");
+console.log("%c  decode.reverse('olleH') - Reverse String", "color: #666;");
+console.log("%c  reveal() - Show all secrets", "color: #ff4444; font-weight: bold;");
+
+// Decoder object
+window.decode = {
+    base64: function(str) {
+        try {
+            const decoded = atob(str);
+            console.log('%c✓ DECODED:', 'color: #00ff00;', decoded);
+            return decoded;
+        } catch(e) {
+            console.log('%c✗ ERROR:', 'color: #ff0000;', 'Invalid Base64');
+        }
+    },
+    
+    morse: function(morse) {
+        const morseCode = {
+            '.-': 'A', '-...': 'B', '-.-.': 'C', '-..': 'D', '.': 'E',
+            '..-.': 'F', '--.': 'G', '....': 'H', '..': 'I', '.---': 'J',
+            '-.-': 'K', '.-..': 'L', '--': 'M', '-.': 'N', '---': 'O',
+            '.--.': 'P', '--.-': 'Q', '.-.': 'R', '...': 'S', '-': 'T',
+            '..-': 'U', '...-': 'V', '.--': 'W', '-..-': 'X', '-.--': 'Y',
+            '--..': 'Z', '-----': '0', '.----': '1', '..---': '2', '...--': '3',
+            '....-': '4', '.....': '5', '-....': '6', '--...': '7', '---..': '8',
+            '----.': '9', '/': ' '
+        };
+        
+        const decoded = morse.split(' ').map(code => morseCode[code] || '?').join('');
+        console.log('%c✓ DECODED:', 'color: #00ff00;', decoded);
+        return decoded;
+    },
+    
+    binary: function(binary) {
+        const decoded = binary.split(' ').map(bin => 
+            String.fromCharCode(parseInt(bin, 2))
+        ).join('');
+        console.log('%c✓ DECODED:', 'color: #00ff00;', decoded);
+        return decoded;
+    },
+    
+    rot13: function(str) {
+        const decoded = str.replace(/[a-zA-Z]/g, function(c) {
+            return String.fromCharCode(
+                (c <= 'Z' ? 90 : 122) >= (c = c.charCodeAt(0) + 13) ? c : c - 26
+            );
+        });
+        console.log('%c✓ DECODED:', 'color: #00ff00;', decoded);
+        return decoded;
+    },
+    
+    caesar: function(str, shift) {
+        const decoded = str.replace(/[a-zA-Z]/g, function(c) {
+            const start = c <= 'Z' ? 65 : 97;
+            return String.fromCharCode(start + (c.charCodeAt(0) - start - shift + 26) % 26);
+        });
+        console.log('%c✓ DECODED:', 'color: #00ff00;', decoded);
+        return decoded;
+    },
+    
+    reverse: function(str) {
+        const decoded = str.split('').reverse().join('');
+        console.log('%c✓ DECODED:', 'color: #00ff00;', decoded);
+        return decoded;
+    },
+    
+    hex: function(hex) {
+        const decoded = hex.replace(/[^0-9A-Fa-f]/g, '').match(/.{2}/g)
+            .map(byte => String.fromCharCode(parseInt(byte, 16))).join('');
+        console.log('%c✓ DECODED:', 'color: #00ff00;', decoded);
+        return decoded;
+    }
+};
+
+// Auto-decode all hidden messages and display in console after 10 seconds
+setTimeout(function() {
+    console.log("%c", "font-size: 1px;"); // Spacer
+    console.log("%c🔍 SCANNING FOR HIDDEN MESSAGES...", "color: #ff4444; font-size: 16px; font-weight: bold;");
+    
+    // Find and decode Base64 in meta
+    const metaDesc = document.querySelector('meta[name="description"]');
+    if (metaDesc) {
+        console.log("%c📝 Found Base64 in meta description:", "color: #ffaa00;");
+        decode.base64(metaDesc.content);
+    }
+    
+    // Find morse in comments (simulated - actual would require parsing)
+    console.log("%c📡 Morse code found in HTML comments:", "color: #ffaa00;");
+    console.log("%cHint: View page source and look for morse patterns", "color: #666;");
+    
+    // Reveal hidden coordinates
+    const keywords = document.querySelector('meta[name="keywords"]');
+    if (keywords) {
+        console.log("%c🗺️ Coordinates found:", "color: #ffaa00;", keywords.content);
+    }
+    
+    console.log("%c💡 TIP: Right-click on the logo or image for more secrets!", "color: #00ff00;");
+}, 10000);
+
+// Easter Egg: Type "decrypt" to auto-decode everything visible
+let decryptTyped = '';
+document.addEventListener('keypress', function(e) {
+    decryptTyped += e.key.toLowerCase();
+    
+    if (decryptTyped.includes('decrypt')) {
+        console.clear();
+        console.log("%c🔓 DECRYPTING ALL HIDDEN MESSAGES...", "color: #ff4444; font-size: 20px; font-weight: bold;");
+        
+        // Reveal all secrets
+        console.log("\n%c=== PASSWORD CODES ===", "color: #ffaa00; font-size: 14px;");
+        console.log("Date format: 210907 (21.09.2007)");
+        console.log("Full code: OMEGA_REBORN_2007");
+        console.log("Alternative: 092107 or 20070921");
+        
+        console.log("\n%c=== LOCATION DATA ===", "color: #ffaa00; font-size: 14px;");
+        console.log("Coordinates: -7.9666, 112.6326");
+        console.log("Location: Malang Underground Facility, Indonesia");
+        
+        console.log("\n%c=== SUBJECT INFO ===", "color: #ffaa00; font-size: 14px;");
+        console.log("Subject ID: #404-OMEGA");
+        console.log("Classification: HIGHLY RESTRICTED");
+        console.log("Status: EXPERIMENT_ACTIVE");
+        console.log("Timestamp: Sept 21, 2007 01:47 AM (Unix: 1190332020)");
+        
+        console.log("\n%c=== HIDDEN MESSAGES ===", "color: #ffaa00; font-size: 14px;");
+        console.log("Message 1: Subject #404 is not human. They are a manifestation of something darker.");
+        console.log("Message 2: The truth is hidden in plain sight");
+        console.log("Message 3: The experiment never ended. Subject #404 is still out there. Watching. Waiting.");
+        
+        alert('🔓 ALL SECRETS REVEALED IN CONSOLE!');
+        decryptTyped = '';
+    }
+    
+    setTimeout(() => { decryptTyped = ''; }, 2000);
+});
