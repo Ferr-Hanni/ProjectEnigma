@@ -70,6 +70,118 @@ const images = [
     "assets/img/unknown5.jpg"
 ];
 
+document.addEventListener('DOMContentLoaded', function() {
+    const bootSequence = document.getElementById('boot-sequence');
+    const bootContent = document.getElementById('boot-content');
+    const bootProgress = document.getElementById('boot-progress');
+    const bootPercent = document.getElementById('boot-percent');
+    const bootFooter = document.getElementById('boot-footer');
+    
+    // Boot messages sequence
+    const bootMessages = [
+        { text: "SYSTEM BOOT INITIATED...", delay: 100, type: 'normal' },
+        { text: "BIOS DATE: 09/21/2007 01:47:00 AM", delay: 200, type: 'normal' },
+        { text: "CPU: OMEGA_PROCESSOR_X404", delay: 150, type: 'normal' },
+        { text: "MEM: 640K RAM... OK", delay: 100, type: 'success' },
+        { text: "CHECKING PERIPHERALS...", delay: 300, type: 'normal' },
+        { text: "SECURE CONNECTION ESTABLISHING...", delay: 400, type: 'warning' },
+        { text: "ENCRYPTION: AES-256", delay: 200, type: 'normal' },
+        { text: "DECRYPTING CLASSIFIED ARCHIVES...", delay: 500, type: 'warning' },
+        { text: "WARNING: UNAUTHORIZED ACCESS DETECTED", delay: 600, type: 'error' },
+        { text: "LOCATION: MALANG UNDERGROUND FACILITY", delay: 300, type: 'normal' },
+        { text: "COORDINATES: -7.9666, 112.6326", delay: 200, type: 'normal' },
+        { text: "SUBJECT #404: STATUS ACTIVE", delay: 400, type: 'error' },
+        { text: "BYPASSING SECURITY PROTOCOLS...", delay: 600, type: 'warning' },
+        { text: "ACCESS GRANTED - LEVEL 5 CLEARANCE", delay: 500, type: 'success' },
+        { text: "LOADING INTERFACE...", delay: 300, type: 'normal' }
+    ];
+    
+    let messageIndex = 0;
+    let progress = 0;
+    let bootComplete = false;
+    
+    // Typing effect for messages
+    function addBootLine(message, type = 'normal') {
+        const line = document.createElement('div');
+        line.className = `boot-line ${type}`;
+        
+        // Add timestamp
+        const now = new Date();
+        const timeStr = `[${now.getHours().toString().padStart(2,'0')}:${now.getMinutes().toString().padStart(2,'0')}:${now.getSeconds().toString().padStart(2,'0')}]`;
+        
+        line.textContent = `${timeStr} ${message}`;
+        bootContent.appendChild(line);
+        bootContent.scrollTop = bootContent.scrollHeight;
+    }
+    
+    // Progress bar animation
+    function updateProgress() {
+        const increment = Math.random() * 8 + 2;
+        progress = Math.min(progress + increment, 100);
+        bootProgress.style.width = progress + '%';
+        bootPercent.textContent = Math.floor(progress) + '%';
+        
+        if (progress < 100) {
+            setTimeout(updateProgress, Math.random() * 200 + 100);
+        } else {
+            setTimeout(finishBoot, 500);
+        }
+    }
+    
+    // Sequential message display
+    function showNextMessage() {
+        if (messageIndex < bootMessages.length) {
+            const msg = bootMessages[messageIndex];
+            addBootLine(msg.text, msg.type);
+            messageIndex++;
+            
+            // Jitter effect saat warning/error
+            if (msg.type === 'error' || msg.type === 'warning') {
+                bootSequence.style.transform = `translate(${Math.random()*4-2}px, ${Math.random()*4-2}px)`;
+                setTimeout(() => {
+                    bootSequence.style.transform = 'translate(0,0)';
+                }, 100);
+            }
+            
+            setTimeout(showNextMessage, msg.delay);
+        }
+    }
+    
+    // Finish boot sequence
+    function finishBoot() {
+        bootComplete = true;
+        bootFooter.style.opacity = '1';
+        bootSequence.classList.add('boot-glitch');
+        
+        // Auto-hide setelah 3 detik jika tidak diklik
+        setTimeout(() => {
+            if (bootComplete) hideBoot();
+        }, 3000);
+    }
+    
+    // Hide boot overlay
+    function hideBoot() {
+        bootSequence.classList.add('hidden');
+        setTimeout(() => {
+            bootSequence.style.display = 'none';
+        }, 800);
+    }
+    
+    // Click to skip
+    bootSequence.addEventListener('click', function() {
+        if (bootComplete) {
+            hideBoot();
+        } else {
+            // Speed up if clicked during loading
+            progress = Math.min(progress + 20, 90);
+        }
+    });
+    
+    // Start boot sequence
+    showNextMessage();
+    updateProgress();
+});
+
 // Random text glitch effect
 function glitchRandomText() {
     const allText = document.querySelectorAll('.text-content p, .content h2, .content h3');
