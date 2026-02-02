@@ -1070,3 +1070,257 @@ button:hover {
         transform: skew(0deg, 0deg);
     }
 }
+/* ============================================
+   MYSTIC RESONANCE INDICATOR STYLES
+   ============================================ */
+
+.resonance-container {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #331111;
+    background: linear-gradient(180deg, rgba(20, 10, 10, 0.9) 0%, rgba(10, 5, 5, 0.95) 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.resonance-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse at 30% 20%, rgba(139, 0, 0, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(75, 0, 130, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+/* Rune Sigils */
+.resonance-sigil {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.rune {
+    font-size: 1.4rem;
+    color: #3a2222;
+    text-shadow: 0 0 5px rgba(139, 0, 0, 0.3);
+    transition: all 0.5s ease;
+    opacity: 0.4;
+}
+
+.rune.active {
+    color: #ff4444;
+    text-shadow: 
+        0 0 10px rgba(255, 68, 68, 0.8),
+        0 0 20px rgba(255, 68, 68, 0.4),
+        0 0 30px rgba(139, 0, 0, 0.3);
+    opacity: 1;
+    animation: rune-pulse 2s ease-in-out infinite;
+}
+
+@keyframes rune-pulse {
+    0%, 100% { 
+        text-shadow: 
+            0 0 10px rgba(255, 68, 68, 0.8),
+            0 0 20px rgba(255, 68, 68, 0.4);
+    }
+    50% { 
+        text-shadow: 
+            0 0 15px rgba(255, 68, 68, 1),
+            0 0 30px rgba(255, 68, 68, 0.6),
+            0 0 45px rgba(139, 0, 0, 0.4);
+    }
+}
+
+/* Resonance Bar */
+.resonance-bar {
+    height: 4px;
+    background: linear-gradient(90deg, #1a0a0a 0%, #2a1515 50%, #1a0a0a 100%);
+    border-radius: 2px;
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.resonance-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, 
+        #4a0000 0%, 
+        #8b0000 25%, 
+        #ff2222 50%, 
+        #8b0000 75%, 
+        #4a0000 100%);
+    border-radius: 2px;
+    transition: width 0.4s ease-out;
+    position: relative;
+    box-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+.resonance-fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20px;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: resonance-shimmer 1.5s infinite;
+}
+
+@keyframes resonance-shimmer {
+    0% { transform: translateX(-20px); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateX(20px); opacity: 0; }
+}
+
+/* Resonance Particles */
+.resonance-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.resonance-particles::before,
+.resonance-particles::after {
+    content: "✦";
+    position: absolute;
+    color: rgba(255, 68, 68, 0.3);
+    font-size: 0.5rem;
+    animation: particle-float 3s ease-in-out infinite;
+}
+
+.resonance-particles::before {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.resonance-particles::after {
+    right: 15%;
+    animation-delay: 1.5s;
+}
+
+@keyframes particle-float {
+    0%, 100% { 
+        transform: translateY(0) scale(1);
+        opacity: 0.3;
+    }
+    50% { 
+        transform: translateY(-8px) scale(1.2);
+        opacity: 0.6;
+    }
+}
+
+/* Resonance Text */
+.resonance-text {
+    text-align: center;
+    font-size: 0.75rem;
+    color: #664444;
+    margin: 0;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.resonance-text .glitch-text {
+    color: #884444;
+    position: relative;
+}
+
+.resonance-text .glitch-text::before,
+.resonance-text .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+}
+
+.resonance-text .glitch-text.active::before {
+    animation: glitch-text-anim 0.3s infinite;
+    color: #ff0000;
+    opacity: 0.8;
+    z-index: -1;
+}
+
+.resonance-text .glitch-text.active::after {
+    animation: glitch-text-anim 0.3s infinite reverse;
+    color: #00ffff;
+    opacity: 0.8;
+    z-index: -2;
+}
+
+@keyframes glitch-text-anim {
+    0% { transform: translate(0); }
+    20% { transform: translate(-1px, 1px); }
+    40% { transform: translate(1px, -1px); }
+    60% { transform: translate(-1px, -1px); }
+    80% { transform: translate(1px, 1px); }
+    100% { transform: translate(0); }
+}
+
+.resonance-value {
+    color: #aa4444;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+.resonance-value.high {
+    color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.6);
+    animation: value-flicker 0.5s infinite;
+}
+
+@keyframes value-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+.resonance-unit {
+    color: #553333;
+    font-size: 0.65rem;
+}
+
+/* Hover effect on container */
+.resonance-container:hover {
+    border-color: #442222;
+    box-shadow: 
+        0 0 15px rgba(139, 0, 0, 0.1),
+        inset 0 0 20px rgba(139, 0, 0, 0.05);
+}
+
+.resonance-container:hover .rune {
+    opacity: 0.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .resonance-container {
+        padding: 12px;
+    }
+
+    .rune {
+        font-size: 1.1rem;
+    }
+
+    .resonance-text {
+        font-size: 0.7rem;
+    }
+}
+
+/* ============================================
+   END MYSTIC RESONANCE INDICATOR STYLES
+   ============================================ */

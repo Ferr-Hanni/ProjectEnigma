@@ -220,6 +220,9 @@ if (imgElement) {
         clickCount++;
         counterDisplay.textContent = clickCount;
 
+        // Update resonance bar and runes
+        updateResonance(clickCount);
+
         // Ganti gambar sesuai jumlah klik
         if (clickCount < images.length) {
             imgElement.src = images[clickCount];
@@ -680,3 +683,61 @@ document.addEventListener('keypress', function(e) {
     
     setTimeout(() => { decryptTyped = ''; }, 2000);
 });
+// ============================================
+// MYSTIC RESONANCE SYSTEM
+// ============================================
+
+function updateResonance(clicks) {
+    const resonanceFill = document.getElementById('resonance-fill');
+    const runes = document.querySelectorAll('.rune');
+    const glitchText = document.querySelector('.resonance-text .glitch-text');
+    const resonanceValue = document.querySelector('.resonance-value');
+
+    // Calculate percentage (max at 5 clicks = 100%)
+    const percentage = Math.min((clicks / 5) * 100, 100);
+
+    // Update resonance bar
+    if (resonanceFill) {
+        resonanceFill.style.width = percentage + '%';
+    }
+
+    // Activate runes based on click count
+    runes.forEach((rune, index) => {
+        if (clicks > index) {
+            rune.classList.add('active');
+            // Add staggered animation delay
+            rune.style.animationDelay = (index * 0.2) + 's';
+        }
+    });
+
+    // Add glitch effect to text at higher levels
+    if (glitchText && clicks >= 3) {
+        glitchText.classList.add('active');
+    }
+
+    // Make value glow at high resonance
+    if (resonanceValue && clicks >= 4) {
+        resonanceValue.classList.add('high');
+    }
+
+    // Change sync rate text at max resonance
+    if (clicks >= 5 && glitchText) {
+        const texts = ['SYNC RATE', 'ENTITY SYNC', 'CONNECTION', 'BREACHING'];
+        glitchText.setAttribute('data-text', texts[Math.min(clicks - 5, texts.length - 1)]);
+        glitchText.textContent = glitchText.getAttribute('data-text');
+    }
+}
+
+// Initialize resonance on page load
+document.addEventListener('DOMContentLoaded', function() {
+    // Subtle pulse animation for runes even at 0%
+    const runes = document.querySelectorAll('.rune');
+    runes.forEach((rune, index) => {
+        rune.style.animation = `rune-pulse 3s ease-in-out infinite`;
+        rune.style.animationDelay = (index * 0.5) + 's';
+    });
+});
+
+// ============================================
+// END MYSTIC RESONANCE SYSTEM
+// ============================================
