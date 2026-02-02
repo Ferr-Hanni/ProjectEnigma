@@ -8,37 +8,148 @@
 <base target="_blank">
 </head>
 <body>
-<nav class="navbar">
-    <div class="nav-container">
-        <div class="nav-logo">PROJECT ENIGMA</div>
-        
-        <!-- Hamburger Icon -->
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress" id="scrollProgress"></div>
+    
+    <!-- Corruption Overlay -->
+    <div class="corruption-overlay" id="corruptionOverlay"></div>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">PROJECT ENIGMA</div>
+            
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index2x.html">Terminal Access</a></li>
+                <li><a href="records.html">Records</a></li>
+                <li><a href="classified.html">Classified</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container glitch-scroll-container" id="mainContainer">
+        <div class="career-section">
+            <div class="career-header">
+                <h1>OPERATIVE FILE: SUBJECT #404</h1>
+                <p class="subtitle">RPL DIVISION - CLASSIFIED CAREER LOG</p>
+            </div>
+            
+            <div class="warning-banner" id="warningBanner"></div>
+            
+            <div class="timeline">
+                <!-- Timeline Item 1 -->
+                <div class="timeline-item" data-scroll="0">
+                    <div class="timeline-date">YEAR 01 - ORIENTATION PHASE</div>
+                    <h3 class="timeline-title">Initial Entry: RPL Program</h3>
+                    <div class="timeline-content">
+                        <p>Subject #404 was <span class="heavy-redacted">accepted</span> into the RPL (Rekayasa Perangkat Lunak) division under the pretense of <span class="heavy-redacted">exceptional talent</span>. Early assessments indicated <span class="heavy-redacted">promising capabilities</span> in software engineering protocols.</p>
+                        <p>First semester performance: <span class="heavy-redacted">EXEMPLARY</span>. Subject demonstrated proficiency in <span class="heavy-redacted">algorithmic thinking</span> and <span class="heavy-redacted">problem-solving matrices</span>.</p>
+                        <p>Status: <span class="glitch-text-scroll">MONITORED</span></p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 2 -->
+                <div class="timeline-item" data-scroll="20">
+                    <div class="timeline-date">YEAR 01 - SEMESTER EVALUATION</div>
+                    <h3 class="timeline-title">First Anomaly Detected</h3>
+                    <div class="timeline-content">
+                        <p>During the <span class="heavy-redacted">fundamental programming</span> examination, subject exhibited <span class="heavy-redacted">unusual patterns</span>. Code submissions contained <span class="heavy-redacted">recursive loops without exit conditions</span>.</p>
+                        <p>Instructor notes: <span class="heavy-redacted">"Shows potential but lacks discipline. Code works... technically."</span></p>
+                        <p>Grade assessment: <span class="heavy-redacted">SUFFICIENT</span></p>
+                        <p>Warning flags: <span class="glitch-text-scroll">ELEVATED</span></p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 3 -->
+                <div class="timeline-item" data-scroll="40">
+                    <div class="timeline-date">YEAR 02 - OBJECT ORIENTED PROTOCOLS</div>
+                    <h3 class="timeline-title">The Inheritance Incident</h3>
+                    <div class="timeline-content">
+                        <p>Subject failed to grasp <span class="heavy-redacted">object-oriented paradigms</span>. Created a class hierarchy with <span class="heavy-redacted">circular dependencies</span> that crashed the entire testing environment.</p>
+                        <p>Project submission: <span class="heavy-redacted">INCOMPLETE</span>. The code compiled but <span class="heavy-redacted">produced unexpected results</span>. Subject claimed it was <span class="heavy-redacted">"working on my machine"</span>.</p>
+                        <p>Remediation attempted: <span class="heavy-redacted">FAILED</span></p>
+                        <p>System stability: <span class="glitch-text-scroll">COMPROMISED</span></p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 4 -->
+                <div class="timeline-item" data-scroll="60">
+                    <div class="timeline-date">YEAR 02 - DATABASE INTEGRATION</div>
+                    <h3 class="timeline-title">SQL Catastrophe</h3>
+                    <div class="timeline-content">
+                        <p>During <span class="heavy-redacted">database management</span> practicum, subject executed <span class="heavy-redacted">unoptimized queries</span> that brought the server to a halt. The infamous <span class="heavy-redacted">SELECT * FROM</span> incident is now used as a cautionary tale.</p>
+                        <p>Query execution time: <span class="heavy-redacted">47 MINUTES</span> (Expected: &lt;2 seconds)</p>
+                        <p>Records affected: <span class="heavy-redacted">ALL OF THEM</span></p>
+                        <p>Recovery status: <span class="glitch-text-scroll">ONGOING</span></p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 5 -->
+                <div class="timeline-item" data-scroll="70">
+                    <div class="timeline-date">YEAR 03 - WEB DEVELOPMENT MODULE</div>
+                    <h3 class="timeline-title">Frontend Fracture</h3>
+                    <div class="timeline-content">
+                        <p>Subject's <span class="heavy-redacted">web interface</span> project displayed <span class="heavy-redacted">unintentional artistic expression</span>. CSS was described as <span class="heavy-redacted">"avant-garde chaos"</span> by evaluators.</p>
+                        <p>Notable features: <span class="heavy-redacted">absolute positioning everywhere</span>, <span class="heavy-redacted">z-index wars</span>, and a <span class="heavy-redacted">responsive design that responded to nothing</span>.</p>
+                        <p>Mobile compatibility: <span class="heavy-redacted">NON-EXISTENT</span></p>
+                        <p>User experience rating: <span class="glitch-text-scroll">TRAUMATIC</span></p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 6 -->
+                <div class="timeline-item" data-scroll="80">
+                    <div class="timeline-date">YEAR 03 - FINAL PROJECT PHASE</div>
+                    <h3 class="timeline-title">The Deployment Disaster</h3>
+                    <div class="timeline-content">
+                        <p>Final project presentation: <span class="heavy-redacted">CATASTROPHIC</span>. Subject deployed to <span class="heavy-redacted">production environment</span> without testing. The application <span class="heavy-redacted">immediately crashed</span> upon first user interaction.</p>
+                        <p>Error logs showed <span class="heavy-redacted">null pointer exceptions</span>, <span class="heavy-redacted">memory leaks</span>, and <span class="heavy-redacted">infinite loops</span> working in perfect harmony to destroy everything.</p>
+                        <p>Rollback initiated: <span class="heavy-redacted">SUCCESSFUL</span></p>
+                        <p>Subject's dignity: <span class="glitch-text-scroll">IRRECOVERABLE</span></p>
+                    </div>
+                </div>
+                
+                <!-- Timeline Item 7 -->
+                <div class="timeline-item" data-scroll="90">
+                    <div class="timeline-date">YEAR 03 - TERMINATION</div>
+                    <h3 class="timeline-title">Program Exit: INCOMPLETE</h3>
+                    <div class="timeline-content">
+                        <p>Academic standing: <span class="heavy-redacted">PROBATION</span>. Subject's cumulative GPA fell below <span class="heavy-redacted">acceptable thresholds</span>. The RPL division recommended <span class="heavy-redacted">immediate reassessment</span> of subject's career trajectory.</p>
+                        <p>Final evaluation: <span class="heavy-redacted">"Technically present, functionally absent."</span></p>
+                        <p>Credits earned: <span class="heavy-redacted">INSUFFICIENT</span></p>
+                        <p>Career prospects: <span class="glitch-text-scroll">[DATA EXPUNGED]</span></p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Final Message -->
+            <div class="final-message" data-scroll="95">
+                <h2>⚠ FILE CORRUPTION IMMINENT ⚠</h2>
+                <p>The remaining data has been <span class="heavy-redacted">classified beyond your clearance level</span>.</p>
+                <p>Further inquiry may result in <span class="heavy-redacted">memory reformatting</span>.</p>
+            </div>
+            
+            <!-- Hidden Truth -->
+            <div class="hidden-truth" id="hiddenTruth">
+                <h3>// SYSTEM MESSAGE</h3>
+                <p>"Setiap kegagalan adalah bug dalam sistem. Tapi setiap bug bisa di-patch. Subject #404 belum menemukan update-nya."</p>
+                <p style="margin-top: 20px; font-size: 0.8rem; color: #553333;">— Unknown Developer</p>
+            </div>
         </div>
         
-        <ul class="nav-menu" id="navMenu">
-            <li><a href="index.html" >Home</a></li>
-            <li><a href="index2x.html">Terminal Access</a></li>
-            <li><a href="records.html">Records</a></li>
-            <li><a href="classified.html">Classified</a></li>
-        </ul>
-    </div>
-</nav>
-
-
-
-
-
-
-
-
         <footer>
             <p>&copy; 2007 System Verification Research Corp. </p>
             <p class="footer-note">CONFIDENTIAL - DO NOT DISTRIBUTE - FERDIANTO</p>
+            <p style="font-size: 0.6rem; color: #330000; margin-top: 10px;">
+                [ERROR: Career trajectory not found in database]
+            </p>
         </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>

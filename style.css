@@ -1324,3 +1324,433 @@ button:hover {
 /* ============================================
    END MYSTIC RESONANCE INDICATOR STYLES
    ============================================ */
+
+/* ============================================
+   CLASSIFIED PAGE - SCROLL GLITCH EFFECTS
+   ============================================ */
+
+/* Heavy redaction for classified content */
+.heavy-redacted {
+    background: linear-gradient(90deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a0a 100%);
+    color: transparent !important;
+    cursor: help;
+    position: relative;
+    padding: 2px 8px;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+    user-select: none;
+}
+
+.heavy-redacted::after {
+    content: "[REDACTED]";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #441111;
+    font-size: 0.65rem;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.heavy-redacted:hover {
+    background: rgba(255, 68, 68, 0.15);
+    border: 1px solid rgba(255, 68, 68, 0.3);
+}
+
+.heavy-redacted:hover::after {
+    color: #ff4444;
+    text-shadow: 0 0 10px rgba(255, 68, 68, 0.5);
+}
+
+/* Glitch text animation for scroll */
+@keyframes text-corrupt {
+    0% { 
+        text-shadow: 2px 0 0 rgba(255, 0, 0, 0.8), -2px 0 0 rgba(0, 255, 255, 0.8);
+        transform: skew(0deg);
+        filter: hue-rotate(0deg);
+    }
+    20% { 
+        text-shadow: -2px 0 0 rgba(255, 0, 0, 0.8), 2px 0 0 rgba(0, 255, 255, 0.8);
+        transform: skew(-3deg);
+        filter: hue-rotate(90deg);
+    }
+    40% { 
+        text-shadow: 2px 0 0 rgba(255, 0, 0, 0.8), -2px 0 0 rgba(0, 255, 255, 0.8);
+        transform: skew(3deg);
+        filter: hue-rotate(180deg);
+    }
+    60% { 
+        text-shadow: -2px 0 0 rgba(255, 0, 0, 0.8), 2px 0 0 rgba(0, 255, 255, 0.8);
+        transform: skew(-2deg);
+        filter: hue-rotate(270deg);
+    }
+    80% { 
+        text-shadow: 2px 0 0 rgba(255, 0, 0, 0.8), -2px 0 0 rgba(0, 255, 255, 0.8);
+        transform: skew(2deg);
+        filter: hue-rotate(180deg);
+    }
+    100% { 
+        text-shadow: 2px 0 0 rgba(255, 0, 0, 0.8), -2px 0 0 rgba(0, 255, 255, 0.8);
+        transform: skew(0deg);
+        filter: hue-rotate(0deg);
+    }
+}
+
+.glitch-text-scroll.glitching {
+    animation: text-corrupt 0.15s infinite;
+    color: #ff6666 !important;
+}
+
+/* Timeline item glitch */
+@keyframes item-glitch {
+    0% { 
+        transform: translate(0); 
+        filter: hue-rotate(0deg);
+        border-color: #221111;
+    }
+    25% { 
+        transform: translate(-3px, 2px); 
+        filter: hue-rotate(120deg);
+        border-color: #ff4444;
+    }
+    50% { 
+        transform: translate(3px, -2px); 
+        filter: hue-rotate(240deg);
+        border-color: #ff0000;
+    }
+    75% { 
+        transform: translate(-2px, -3px); 
+        filter: hue-rotate(180deg);
+        border-color: #ff4444;
+    }
+    100% { 
+        transform: translate(0); 
+        filter: hue-rotate(0deg);
+        border-color: #221111;
+    }
+}
+
+.timeline-item.glitching {
+    animation: item-glitch 0.3s infinite;
+}
+
+/* Corruption overlay */
+.corruption-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0;
+    background: 
+        repeating-linear-gradient(
+            0deg,
+            rgba(255, 0, 0, 0.03) 0px,
+            rgba(255, 0, 0, 0.03) 1px,
+            transparent 1px,
+            transparent 2px
+        );
+    transition: opacity 0.3s ease;
+}
+
+.corruption-overlay.active {
+    animation: corruption-flicker 0.08s infinite;
+}
+
+@keyframes corruption-flicker {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 0.6; }
+}
+
+/* Scroll progress bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #ff4444, #ff8888, #ff4444);
+    z-index: 10000;
+    width: 0%;
+    box-shadow: 0 0 15px rgba(255, 68, 68, 0.8);
+}
+
+/* Container shake effect */
+@keyframes container-shake {
+    0% { transform: translate(0, 0); }
+    10% { transform: translate(-2px, 1px); }
+    20% { transform: translate(2px, -1px); }
+    30% { transform: translate(-1px, -2px); }
+    40% { transform: translate(2px, 2px); }
+    50% { transform: translate(-2px, -1px); }
+    60% { transform: translate(1px, 2px); }
+    70% { transform: translate(-1px, -1px); }
+    80% { transform: translate(2px, -2px); }
+    90% { transform: translate(-2px, 1px); }
+    100% { transform: translate(0, 0); }
+}
+
+/* Hidden truth reveal */
+.hidden-truth {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    padding: 40px;
+    border: 1px dashed rgba(255, 68, 68, 0.3);
+    margin-top: 40px;
+    background: rgba(20, 5, 5, 0.5);
+}
+
+.hidden-truth.revealed {
+    opacity: 1;
+    transform: translateY(0);
+    border-color: rgba(255, 68, 68, 0.6);
+    box-shadow: 0 0 30px rgba(255, 68, 68, 0.1);
+}
+
+.hidden-truth h3 {
+    color: #ff4444;
+    margin-bottom: 15px;
+    font-size: 1rem;
+    letter-spacing: 3px;
+}
+
+.hidden-truth p {
+    color: #aa6666;
+    font-style: italic;
+    line-height: 1.8;
+}
+
+/* Warning banner */
+.warning-banner {
+    background: linear-gradient(90deg, #200 0%, #400 50%, #200 100%);
+    border: 1px solid #662222;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
+}
+
+.warning-banner::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 68, 68, 0.1), transparent);
+    animation: warning-sweep 3s infinite;
+}
+
+@keyframes warning-sweep {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+/* Career section styles */
+.career-section {
+    padding: 40px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.career-header {
+    text-align: center;
+    margin-bottom: 50px;
+    padding: 30px 20px;
+    background: linear-gradient(180deg, rgba(20, 10, 10, 0.9) 0%, rgba(10, 5, 5, 0.95) 100%);
+    border: 1px solid #331111;
+    position: relative;
+}
+
+.career-header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #ff4444, transparent);
+}
+
+.career-header h1 {
+    color: #ff4444;
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+    text-shadow: 0 0 20px rgba(255, 68, 68, 0.5);
+    letter-spacing: 3px;
+}
+
+.career-header .subtitle {
+    color: #664444;
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+}
+
+/* Timeline styles */
+.timeline {
+    position: relative;
+    padding-left: 50px;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, #ff4444 0%, #442222 30%, #221111 70%, #000 100%);
+}
+
+.timeline-item {
+    position: relative;
+    margin-bottom: 40px;
+    padding: 25px;
+    background: rgba(10, 5, 5, 0.8);
+    border: 1px solid #221111;
+    border-left: 3px solid #442222;
+    transition: all 0.3s ease;
+}
+
+.timeline-item::before {
+    content: "◉";
+    position: absolute;
+    left: -43px;
+    top: 28px;
+    color: #442222;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.timeline-item:hover::before {
+    color: #ff4444;
+    text-shadow: 0 0 15px rgba(255, 68, 68, 0.8);
+}
+
+.timeline-item:hover {
+    border-color: #442222;
+    box-shadow: 0 0 20px rgba(255, 68, 68, 0.05);
+}
+
+.timeline-date {
+    color: #884444;
+    font-size: 0.7rem;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.timeline-title {
+    color: #ff6666;
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.timeline-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, #ff4444, transparent);
+}
+
+.timeline-content {
+    color: #b4b4b4;
+    line-height: 1.9;
+    font-size: 0.9rem;
+}
+
+.timeline-content p {
+    margin-bottom: 12px;
+}
+
+/* Final message */
+.final-message {
+    text-align: center;
+    padding: 50px 30px;
+    border: 2px solid #ff4444;
+    background: linear-gradient(180deg, rgba(50, 0, 0, 0.3) 0%, rgba(20, 0, 0, 0.5) 100%);
+    margin-top: 50px;
+    position: relative;
+    overflow: hidden;
+}
+
+.final-message::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+        radial-gradient(ellipse at 30% 20%, rgba(255, 68, 68, 0.1) 0%, transparent 50%),
+        radial-gradient(ellipse at 70% 80%, rgba(139, 0, 0, 0.08) 0%, transparent 50%);
+    pointer-events: none;
+}
+
+.final-message h2 {
+    color: #ff4444;
+    font-size: 1.3rem;
+    margin-bottom: 20px;
+    text-shadow: 0 0 30px rgba(255, 68, 68, 0.8);
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+}
+
+.final-message p {
+    color: #884444;
+    font-size: 0.85rem;
+    line-height: 1.8;
+    position: relative;
+    z-index: 1;
+}
+
+/* Responsive for classified page */
+@media (max-width: 768px) {
+    .career-section {
+        padding: 30px 15px;
+    }
+    
+    .career-header h1 {
+        font-size: 1.2rem;
+    }
+    
+    .timeline {
+        padding-left: 35px;
+    }
+    
+    .timeline::before {
+        left: 10px;
+    }
+    
+    .timeline-item {
+        padding: 18px;
+    }
+    
+    .timeline-item::before {
+        left: -32px;
+    }
+    
+    .timeline-title {
+        font-size: 1rem;
+    }
+    
+    .timeline-content {
+        font-size: 0.85rem;
+    }
+}
+
+/* ============================================
+   END CLASSIFIED PAGE STYLES
+   ============================================ */
